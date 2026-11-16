@@ -88,7 +88,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
       }
 
       if (onSuccess) onSuccess();
-    }, 1000);
+    }, 900);
   };
 
   const timeSlots = [
@@ -99,21 +99,21 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
   ];
 
   return (
-    <div className={`w-full ${isModal ? '' : 'py-24 bg-radial-glow'}`} id="book-demo">
+    <div className={`w-full ${isModal ? '' : 'py-20 bg-white border-t border-b border-[#EEF0F3]'}`} id="book-demo">
       <div className={`${isModal ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'}`}>
         
         {!isModal && (
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-[#E52430] text-xs font-bold mb-3">
               <Calendar className="w-3.5 h-3.5" />
               <span>Interactive Walkthrough</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#171923] tracking-tight">
               Schedule Your Free Product Walkthrough
             </h2>
 
-            <p className="mt-4 text-base sm:text-lg text-slate-300">
+            <p className="mt-3.5 text-base sm:text-lg text-[#252832]">
               See how our ready-to-use business software functions with your specific team workflow. 
               No obligations, no pressure.
             </p>
@@ -121,56 +121,56 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
         )}
 
         <div className={`mx-auto ${isModal ? 'max-w-full' : 'max-w-4xl'}`}>
-          <div className="bg-navy-900/90 rounded-2xl border border-purple-500/30 shadow-2xl overflow-hidden backdrop-blur-xl">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-soft-lg overflow-hidden">
             
             {/* Form Header Info Banner */}
-            <div className="bg-gradient-to-r from-purple-900/40 via-navy-800 to-indigo-900/40 p-6 sm:p-7 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="bg-[#F7F8FA] p-6 sm:p-7 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <span className="text-xs uppercase font-bold text-purple-300 tracking-wider">
+                <span className="text-[11px] uppercase font-bold text-[#E52430] tracking-wider">
                   Direct Specialist Demo
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-0.5">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#171923] mt-0.5">
                   {isModal ? 'Book a Product Demonstration' : 'Reserve Your Live Demonstration'}
                 </h3>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-300 bg-navy-950/80 px-3 py-1.5 rounded-lg border border-white/10">
-                <ShieldCheck className="w-4 h-4 text-purple-400" />
-                <span>Zero spam guarantee</span>
+              <div className="flex items-center gap-2 text-xs text-[#252832] bg-white px-3.5 py-1.5 rounded-xl border border-slate-200 shadow-soft-sm">
+                <ShieldCheck className="w-4 h-4 text-[#E52430]" />
+                <span className="font-semibold">Zero spam guarantee</span>
               </div>
             </div>
 
             {/* Form Content */}
             <div className="p-6 sm:p-8">
               {isSubmitted ? (
-                <div className="py-10 text-center space-y-5 animate-in zoom-in-95 duration-300">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+                <div className="py-10 text-center space-y-5 animate-in zoom-in-95 duration-200">
+                  <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-soft-sm">
                     <CheckCircle className="w-8 h-8" />
                   </div>
 
                   <div>
-                    <h4 className="text-2xl font-bold text-white">
+                    <h4 className="text-2xl font-bold text-[#171923]">
                       Demo Request Registered!
                     </h4>
-                    <p className="text-sm text-slate-300 max-w-md mx-auto mt-2">
-                      Thank you, <strong className="text-white">{formData.fullName}</strong>. We have received your request for{' '}
-                      <span className="text-purple-300 font-semibold">{formData.preferredProduct}</span>. A Softstreak solution specialist will reach out shortly.
+                    <p className="text-sm text-[#252832] max-w-md mx-auto mt-2 leading-relaxed">
+                      Thank you, <strong className="text-[#171923]">{formData.fullName}</strong>. We have received your request for{' '}
+                      <span className="text-[#E52430] font-bold">{formData.preferredProduct}</span>. A SoftStreak solution specialist will reach out shortly.
                     </p>
                   </div>
 
                   {/* Immediate WhatsApp Connect Button */}
-                  <div className="p-5 rounded-xl bg-navy-950 border border-white/5 max-w-md mx-auto space-y-3">
-                    <div className="text-xs text-slate-400">
+                  <div className="p-5 rounded-2xl bg-[#F7F8FA] border border-slate-200 max-w-md mx-auto space-y-3">
+                    <div className="text-xs text-slate-600 font-medium">
                       Want an immediate confirmation or prefer chatting on WhatsApp?
                     </div>
                     <a
                       href={buildWhatsAppUrl(
-                        `Hello Softstreak team, I just submitted a demo request for ${formData.preferredProduct}. My name is ${formData.fullName} from ${formData.companyName || 'our company'}.`
+                        `Hello SoftStreak team, I just submitted a demo request for ${formData.preferredProduct}. My name is ${formData.fullName} from ${formData.companyName || 'our company'}.`
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-xl transition"
+                      className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-[#171923] bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition shadow-soft-sm"
                     >
-                      <MessageSquare className="w-4 h-4" />
+                      <MessageSquare className="w-4 h-4 text-emerald-600" />
                       <span>Confirm via WhatsApp Directly</span>
                     </a>
                   </div>
@@ -190,37 +190,37 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                         additionalNotes: '',
                       });
                     }}
-                    className="text-xs text-purple-400 hover:text-purple-300 underline font-medium"
+                    className="text-xs text-[#E52430] hover:underline font-bold"
                   >
                     Submit another booking request
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   {errorMessage && (
-                    <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs">
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-[#E52430] text-xs font-medium">
                       {errorMessage}
                     </div>
                   )}
 
                   {/* Product Choice Dropdown */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#171923] mb-1.5">
                       Select Software Solution *
                     </label>
                     <select
                       name="preferredProduct"
                       value={formData.preferredProduct}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl glass-input text-sm text-white bg-[#0A0F24]"
+                      className="w-full px-4 py-3 rounded-xl clean-input text-sm text-[#171923] font-medium"
                       required
                     >
                       {productsData.map((prod) => (
-                        <option key={prod.id} value={prod.name} className="bg-[#0A0F24] text-white">
+                        <option key={prod.id} value={prod.name}>
                           {prod.name} — ({prod.shortTagline})
                         </option>
                       ))}
-                      <option value="Entire Business Software Suite" className="bg-[#0A0F24] text-white">
+                      <option value="Entire Business Software Suite">
                         Entire Business Software Suite (Integrated Ecosystem)
                       </option>
                     </select>
@@ -229,7 +229,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                   {/* Personal and Business Details Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Your Full Name *
                       </label>
                       <div className="relative">
@@ -240,14 +240,14 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                           value={formData.fullName}
                           onChange={handleChange}
                           placeholder="e.g. Alex Johnson"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl glass-input text-sm"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl clean-input text-sm"
                           required
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Business Email *
                       </label>
                       <div className="relative">
@@ -258,7 +258,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                           value={formData.businessEmail}
                           onChange={handleChange}
                           placeholder="alex@company.com"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl glass-input text-sm"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl clean-input text-sm"
                           required
                         />
                       </div>
@@ -267,7 +267,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Phone / WhatsApp Number *
                       </label>
                       <div className="relative">
@@ -278,14 +278,14 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                           value={formData.phoneNumber}
                           onChange={handleChange}
                           placeholder="+1 (555) 000-0000"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl glass-input text-sm"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl clean-input text-sm"
                           required
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Company Name
                       </label>
                       <div className="relative">
@@ -296,7 +296,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                           value={formData.companyName}
                           onChange={handleChange}
                           placeholder="Your Company / Venture"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl glass-input text-sm"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl clean-input text-sm"
                         />
                       </div>
                     </div>
@@ -305,34 +305,34 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                   {/* Company Size & Timing */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Company Headcount / Size
                       </label>
                       <select
                         name="companySize"
                         value={formData.companySize}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white bg-[#0A0F24]"
+                        className="w-full px-4 py-2.5 rounded-xl clean-input text-sm text-[#171923]"
                       >
-                        <option value="1-10 employees" className="bg-[#0A0F24] text-white">1 - 10 employees</option>
-                        <option value="11-50 employees" className="bg-[#0A0F24] text-white">11 - 50 employees</option>
-                        <option value="51-200 employees" className="bg-[#0A0F24] text-white">51 - 200 employees</option>
-                        <option value="200+ employees" className="bg-[#0A0F24] text-white">200+ employees</option>
+                        <option value="1-10 employees">1 - 10 employees</option>
+                        <option value="11-50 employees">11 - 50 employees</option>
+                        <option value="51-200 employees">51 - 200 employees</option>
+                        <option value="200+ employees">200+ employees</option>
                       </select>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#252832] mb-1.5">
                         Preferred Time Slot
                       </label>
                       <select
                         name="preferredTimeSlot"
                         value={formData.preferredTimeSlot}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white bg-[#0A0F24]"
+                        className="w-full px-4 py-2.5 rounded-xl clean-input text-sm text-[#171923]"
                       >
                         {timeSlots.map((slot) => (
-                          <option key={slot} value={slot} className="bg-[#0A0F24] text-white">
+                          <option key={slot} value={slot}>
                             {slot}
                           </option>
                         ))}
@@ -342,7 +342,7 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
 
                   {/* Notes / Special requirements */}
                   <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                    <label className="block text-xs font-bold text-[#252832] mb-1.5">
                       Specific Requirements or Current Challenges (Optional)
                     </label>
                     <textarea
@@ -351,28 +351,28 @@ export const DemoBookingSection: React.FC<DemoBookingSectionProps> = ({
                       value={formData.additionalNotes}
                       onChange={handleChange}
                       placeholder="Tell us what business operations you are looking to streamline..."
-                      className="w-full px-4 py-2.5 rounded-xl glass-input text-sm"
+                      className="w-full px-4 py-2.5 rounded-xl clean-input text-sm"
                     />
                   </div>
 
                   {/* Submission and CTAs */}
                   <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="text-xs text-slate-400 text-center sm:text-left">
+                    <div className="text-xs text-slate-500 font-medium text-center sm:text-left">
                       Offered under {siteConfig.parentCompany}. Confidential consultation.
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-xl shadow-glow-sm hover:shadow-glow transition-all duration-300 disabled:opacity-50"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold text-white bg-[#E52430] hover:bg-[#CF1B27] rounded-xl shadow-soft-sm hover:shadow-red-sm transition-all duration-200 disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <span>Processing Booking...</span>
                       ) : (
                         <>
-                          <Calendar className="w-4 h-4" />
+                          <Calendar className="w-4 h-4 text-white/90" />
                           <span>Confirm Product Demo</span>
-                          <ArrowRight className="w-4 h-4 text-purple-200" />
+                          <ArrowRight className="w-4 h-4 text-white/90" />
                         </>
                       )}
                     </button>

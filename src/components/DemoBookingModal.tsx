@@ -33,15 +33,15 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-navy-950/85 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-navy-900 border border-purple-500/40 rounded-2xl shadow-2xl z-10 overflow-hidden my-6 animate-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-2xl bg-white border border-slate-200 rounded-2xl shadow-2xl z-10 overflow-hidden my-6 animate-in zoom-in-95 duration-200">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 z-20 p-2 rounded-xl bg-navy-950/80 text-slate-400 hover:text-white border border-white/10 hover:border-purple-500/50 transition-colors"
+          className="absolute top-5 right-5 z-20 p-2 rounded-xl bg-white text-slate-500 hover:text-[#171923] border border-slate-200 hover:border-slate-300 transition-colors shadow-soft-sm"
           aria-label="Close demo booking modal"
         >
           <X className="w-5 h-5" />
@@ -56,4 +56,3 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
     </div>
   );
 };
-

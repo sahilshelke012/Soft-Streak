@@ -8,11 +8,11 @@ export const FAQSection: React.FC = () => {
   const faqs = [
     {
       question: 'What is "ready-to-use business software"?',
-      answer: 'Ready-to-use software is pre-engineered, fully functional software built around industry-standard workflows. Unlike custom development projects that require months of coding from scratch, Softstreak systems are ready to deploy, configure, and connect to your team within days.'
+      answer: 'Ready-to-use software is pre-engineered, fully functional software built around industry-standard workflows. Unlike custom development projects that require months of coding from scratch, SoftStreak systems are ready to deploy, configure, and connect to your team within days.'
     },
     {
-      question: `What is the relationship between Softstreak and ${siteConfig.parentCompany}?`,
-      answer: `Softstreak (Software Street) is an official venture and product ecosystem offered under ${siteConfig.parentCompany}. All software architectures, deployment standards, and customer agreements operate under the backing and governance of Tavreville.`
+      question: `What is the relationship between SoftStreak and ${siteConfig.parentCompany}?`,
+      answer: `SoftStreak (Software Street) is an official venture and product ecosystem offered under ${siteConfig.parentCompany}. All software architectures, deployment standards, and customer agreements operate under the backing and governance of Tavreville.`
     },
     {
       question: 'Can the software be configured to match our exact company processes?',
@@ -33,50 +33,50 @@ export const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 relative bg-navy-950">
+    <section className="py-20 relative bg-[#F7F8FA]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-4">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-[#E52430] text-xs font-bold mb-3">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Got Questions?</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#171923] tracking-tight">
             Frequently Asked Questions
           </h2>
 
-          <p className="mt-3 text-base text-slate-300">
+          <p className="mt-3 text-base text-[#252832]">
             Clear answers to common questions about our ready-to-deploy software and onboarding.
           </p>
         </div>
 
         {/* Accordion */}
-        <div className="space-y-3.5">
+        <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="rounded-xl bg-navy-900/80 border border-white/5 overflow-hidden transition-all duration-200"
+                className="rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-soft-sm transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors"
                 >
-                  <span className="text-sm sm:text-base font-semibold text-white">
+                  <span className="text-sm sm:text-base font-bold text-[#171923]">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-purple-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-purple-300' : ''
+                    className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-[#E52430]' : 'text-slate-400'
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3 animate-in fade-in duration-200">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-[#252832] leading-relaxed border-t border-slate-100 pt-3 animate-in fade-in duration-200">
                     {faq.answer}
                   </div>
                 )}
@@ -86,17 +86,17 @@ export const FAQSection: React.FC = () => {
         </div>
 
         {/* WhatsApp Help Banner */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-navy-900/60 border border-white/10">
-          <p className="text-xs sm:text-sm text-slate-300">
+        <div className="mt-12 text-center p-6 rounded-2xl bg-white border border-slate-200 shadow-soft-sm">
+          <p className="text-xs sm:text-sm text-[#252832] font-medium">
             Have a question not listed here? Connect with our team directly.
           </p>
           <a
-            href={buildWhatsAppUrl("Hello Softstreak team, I have a specific question about your software.")}
+            href={buildWhatsAppUrl("Hello SoftStreak team, I have a specific question about your software.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition"
+            className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-[#E52430] hover:underline transition"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 text-emerald-600" />
             <span>Ask us on WhatsApp &rarr;</span>
           </a>
         </div>
@@ -105,4 +105,3 @@ export const FAQSection: React.FC = () => {
     </section>
   );
 };
-

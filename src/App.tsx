@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { FeaturesSection } from './components/FeaturesSection';
 import { ProductsSection } from './components/ProductsSection';
+import { SolutionsSection } from './components/SolutionsSection';
 import { WhySoftstreak } from './components/WhySoftstreak';
 import { TargetAudienceSection } from './components/TargetAudienceSection';
 import { HowItWorks } from './components/HowItWorks';
+import { PricingSection } from './components/PricingSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
 import { DemoBookingSection } from './components/DemoBookingSection';
 import { AboutSection } from './components/AboutSection';
 import { FAQSection } from './components/FAQSection';
@@ -34,44 +38,56 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col selection:bg-purple-600 selection:text-white">
-      {/* Fixed Sticky Header Navigation */}
+    <div className="min-h-screen bg-[#F7F7F8] text-[#171923] flex flex-col selection:bg-[#E52430] selection:text-white font-sans">
+      {/* Sticky Fixed Navigation Bar with Product, Solutions & Learn Mega Menus */}
       <Navbar onOpenDemoModal={handleOpenDemoModal} />
 
-      {/* Main Homepage Flow */}
-      <main className="flex-grow">
-        {/* Hero Section */}
+      {/* Main Content Flow */}
+      <main className="flex-grow pt-[80px]">
+        {/* 1. Hero Section with Live Product Dashboard Preview */}
         <Hero onOpenDemoModal={handleOpenDemoModal} />
 
-        {/* 6 Core Products Catalog */}
+        {/* 2. Core CRM, Email Tools & Integrations Features */}
+        <FeaturesSection onOpenDemo={handleOpenDemoModal} />
+
+        {/* 3. 6 Core Products Software Catalog */}
         <ProductsSection
           onSelectProduct={(product) => setSelectedProduct(product)}
           onBookDemo={(prodName) => handleOpenDemoModal(prodName)}
         />
 
-        {/* Why Softstreak & Tavreville Governance */}
+        {/* 4. Solutions by Industry & Team */}
+        <SolutionsSection onOpenDemo={handleOpenDemoModal} />
+
+        {/* 5. Why Choose SoftStreak & Comparison Table */}
         <WhySoftstreak />
 
-        {/* Target Audience Solutions: SMB Owners, Founders, Managers */}
+        {/* 6. Tailored Solutions for SMB Owners, Founders & Managers */}
         <TargetAudienceSection />
 
-        {/* 4-Step Deployment Framework */}
+        {/* 7. 4-Step Rollout Framework */}
         <HowItWorks onOpenDemoModal={() => handleOpenDemoModal()} />
 
-        {/* Interactive Demo Booking Section */}
+        {/* 8. Transparent Pricing Plans */}
+        <PricingSection onOpenDemo={handleOpenDemoModal} />
+
+        {/* 9. Testimonials & Verified Client Impact */}
+        <TestimonialsSection />
+
+        {/* 10. Interactive Demo Booking Schedule Form */}
         <DemoBookingSection preselectedProduct={preselectedDemoProduct} />
 
-        {/* About Softstreak & Tavreville */}
+        {/* 11. About SoftStreak & Tavreville Governance */}
         <AboutSection onOpenDemoModal={() => handleOpenDemoModal()} />
 
-        {/* Frequently Asked Questions */}
+        {/* 12. Frequently Asked Questions */}
         <FAQSection />
 
-        {/* Contact Form & Editable Business Details */}
+        {/* 13. Contact Inquiries & Official Details */}
         <ContactSection />
       </main>
 
-      {/* Modern Footer */}
+      {/* 14. Professional Dark Black Footer with White Text & Red Highlights */}
       <Footer onOpenDemoModal={handleOpenDemoModal} />
 
       {/* Modals & Overlays */}
@@ -87,7 +103,7 @@ export const App: React.FC = () => {
         preselectedProduct={preselectedDemoProduct}
       />
 
-      {/* Floating WhatsApp Action Button */}
+      {/* Floating Action WhatsApp Widget */}
       <WhatsAppFloatingButton />
     </div>
   );

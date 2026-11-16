@@ -4,69 +4,129 @@
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    background-color: #060913;
-    color: #f1f5f9;
+    background-color: #F7F7F8;
+    color: #171923;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', sans-serif;
   }
 }
 
-/* Custom modern backdrop blur and subtle gradients */
-.glass-panel {
-  background: rgba(14, 22, 48, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Navbar Specific Styling as per exact Streak specs */
+.navbar-header {
+  height: 80px !important;
 }
 
-.glass-panel-glow {
-  background: rgba(14, 22, 48, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.2);
+.navbar-logo-img {
+  width: 145px !important;
+  max-width: 145px !important;
+  height: auto !important;
 }
 
-.glass-input {
-  background: rgba(10, 15, 36, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+.navbar-logo-text {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}
+
+.navbar-nav-item {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #171923;
+  transition: color 0.15s ease-in-out;
+}
+
+.navbar-nav-item:hover,
+.navbar-nav-item.active {
+  color: #E52430 !important;
+}
+
+.navbar-dropdown-icon {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+}
+
+.navbar-nav-gap {
+  gap: 40px !important;
+}
+
+/* Clean Light UI styles */
+.clean-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 3px 0 rgba(23, 25, 35, 0.04), 0 1px 2px 0 rgba(23, 25, 35, 0.02);
+}
+
+.clean-input {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  color: #171923;
   transition: all 0.2s ease-in-out;
 }
 
-.glass-input:focus {
+.clean-input:focus {
   outline: none;
-  border-color: #8B5CF6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
-  background: rgba(15, 23, 42, 0.95);
+  border-color: #E52430;
+  box-shadow: 0 0 0 3px rgba(229, 36, 48, 0.12);
+  background-color: #FFFFFF;
 }
 
-/* Subtle background grid */
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+/* Subtle light dot grid */
+.bg-light-pattern {
+  background-color: #F7F7F8;
+  background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.bg-radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.18) 0%, rgba(14, 22, 48, 0.05) 50%, transparent 70%);
+/* Button animations */
+.btn-primary {
+  background-color: #E52430;
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  background-color: #D71926;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 36, 48, 0.25);
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #E52430;
+  border: 1px solid #E52430;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(229, 36, 48, 0.04);
+  transform: translateY(-1px);
 }
 
 /* Smooth custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #060913;
+  background: #F7F7F8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #CBD5E1;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  background: #E52430;
 }

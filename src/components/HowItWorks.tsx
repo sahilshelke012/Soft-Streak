@@ -8,18 +8,18 @@ interface HowItWorksProps {
 
 export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenDemoModal }) => {
   return (
-    <section className="py-24 relative bg-navy-950 overflow-hidden">
+    <section className="py-20 relative bg-[#F7F8FA] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-purple-400">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#E52430]">
             Streamlined Deployment
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mt-2">
-            How Softstreak Gets Your Business Live
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#171923] tracking-tight mt-2">
+            How SoftStreak Gets Your Business Live
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-300">
+          <p className="mt-3.5 text-base sm:text-lg text-[#252832]">
             From initial consultation to full team onboarding, our 4-step process ensures a smooth rollout with zero technical friction.
           </p>
         </div>
@@ -29,30 +29,30 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenDemoModal }) => {
           {deploymentSteps.map((step, idx) => (
             <div
               key={step.step}
-              className="relative bg-navy-900/70 rounded-2xl p-6 sm:p-7 border border-white/10 hover:border-purple-500/30 transition-all duration-300 flex flex-col justify-between"
+              className="relative bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 hover:border-red-300 transition-all duration-300 flex flex-col justify-between shadow-soft hover:shadow-card-hover"
             >
               <div>
-                {/* Step Number with purple badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-indigo-500">
+                {/* Step Number with red accent */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-3xl font-extrabold text-[#E52430]">
                     {step.step}
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-purple-400" />
+                  <div className="w-8 h-8 rounded-full bg-red-50 border border-red-200 flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-[#E52430]" />
                   </div>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2">
+                <h3 className="text-lg font-bold text-[#171923] mb-2">
                   {step.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#252832] leading-relaxed">
                   {step.description}
                 </p>
               </div>
 
               {idx < deploymentSteps.length - 1 && (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight className="w-6 h-6 text-purple-500/40" />
+                <div className="hidden lg:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1 border border-slate-200 shadow-soft-sm">
+                  <ArrowRight className="w-4 h-4 text-[#E52430]" />
                 </div>
               )}
             </div>
@@ -60,13 +60,13 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenDemoModal }) => {
         </div>
 
         {/* Step Callout CTA */}
-        <div className="mt-14 text-center">
+        <div className="mt-12 text-center">
           <button
             onClick={onOpenDemoModal}
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-xl shadow-glow-sm hover:shadow-glow transition-all"
+            className="inline-flex items-center gap-2 px-7 py-3.5 text-xs sm:text-sm font-bold text-white bg-[#E52430] hover:bg-[#CF1B27] rounded-xl shadow-soft-sm hover:shadow-red-sm transition-all"
           >
             <span>Start With Step 01: Schedule a Demo</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-white/90" />
           </button>
         </div>
 
@@ -74,4 +74,3 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ onOpenDemoModal }) => {
     </section>
   );
 };
-

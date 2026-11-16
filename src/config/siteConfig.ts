@@ -2,14 +2,15 @@ import type { SiteConfig } from '../types';
 
 /**
  * Site Configuration & Business Details
- * NOTE: Company contact details, phone numbers, and addresses use editable placeholders
- * in compliance with project instructions. Replace placeholder values with verified credentials.
+ * Official SoftStreak Brand Identity:
+ * Tagline: "Essential Software for Every Business"
+ * Offered under Tavreville
  */
 export const siteConfig: SiteConfig = {
-  brandName: "Softstreak",
+  brandName: "SoftStreak",
   parentCompany: "Tavreville",
-  tagline: "Software Street - Ready-to-Use Business Software & Automation",
-  subTagline: "The one-stop shop for ready-to-use business software and intelligent automation, engineered for SMB founders, managers, and growing teams.",
+  tagline: "Essential Software for Every Business",
+  subTagline: "The one-stop shop for ready-to-use business software and automation solutions, engineered for SMB founders, managers, and growing teams under Tavreville.",
   
   contact: {
     // Editable Placeholders:
@@ -28,8 +29,8 @@ export const siteConfig: SiteConfig = {
   },
 
   meta: {
-    defaultTitle: "Softstreak (Software Street) | Ready-to-Use Business Software & Automation",
-    defaultDescription: "Softstreak under Tavreville offers ready-to-use HR, CRM, WhatsApp, AI Automation, Hospital, and Travel management software built for small and medium businesses.",
+    defaultTitle: "SoftStreak | Essential Software for Every Business",
+    defaultDescription: "SoftStreak under Tavreville offers ready-to-use HR, CRM, WhatsApp, AI Automation, Hospital, and Travel management software built for small and medium businesses.",
     siteUrlPlaceholder: "https://softstreak.com",
   }
 };
@@ -39,6 +40,6 @@ export const siteConfig: SiteConfig = {
  */
 export const buildWhatsAppUrl = (customMessage?: string): string => {
   const number = siteConfig.contact.whatsappNumberPlaceholder.replace(/[^0-9]/g, '');
-  const message = customMessage || "Hello Softstreak team, I would like to enquire about your ready-to-use business software solutions.";
+  const message = customMessage || "Hello SoftStreak team, I would like to enquire about your ready-to-use business software solutions.";
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 };

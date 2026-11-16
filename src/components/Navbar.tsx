@@ -1,152 +1,360 @@
-import React, { useState, useEffect } from 'react';
-import { MessageSquare, Calendar, Menu, X, ArrowRight } from 'lucide-react';
-import { siteConfig, buildWhatsAppUrl } from '../config/siteConfig';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  ChevronDown, 
+  Menu, 
+  X, 
+  ArrowRight, 
+  Calendar,
+  Sparkles,
+  Layers,
+  GraduationCap
+} from 'lucide-react';
+import { ProductMegaMenu } from './mega-menus/ProductMegaMenu';
+import { SolutionsMegaMenu } from './mega-menus/SolutionsMegaMenu';
+import { LearnMegaMenu } from './mega-menus/LearnMegaMenu';
 
 interface NavbarProps {
   onOpenDemoModal: (productName?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+type ActiveDropdown = 'product' | 'solutions' | 'learn' | null;
 
+export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
+  const [activeDropdown, setActiveDropdown] = useState<ActiveDropdown>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileExpandedSection, setMobileExpandedSection] = useState<string | null>(null);
+
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown on outside click
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Products', href: '#products' },
-    { label: 'Why Softstreak', href: '#why-us' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Contact Us', href: '#contact' },
-  ];
+  const handleMouseEnter = (menu: ActiveDropdown) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(menu);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
+
+  const handleToggleClick = (menu: ActiveDropdown) => {
+    setActiveDropdown((prev) => (prev === menu ? null : menu));
+  };
+
+  const closeDropdown = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(null);
+  };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-navy-950/85 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/40 py-3'
-          : 'bg-transparent py-5'
-      }`}
+    <header 
+      ref={navContainerRef}
+      className="navbar-header fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#E5E7EB] shadow-[0_1px_3px_0_rgba(23,25,35,0.04)] h-[80px] flex items-center"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo & Brand Identity */}
-          <a href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-700 flex items-center justify-center shadow-glow-sm transition-transform duration-300 group-hover:scale-105">
-              <span className="font-extrabold text-white text-xl tracking-wider">S</span>
-              <div className="absolute -inset-0.5 rounded-xl bg-purple-500/30 blur-sm -z-10 group-hover:bg-purple-500/50 transition"></div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl font-bold tracking-tight text-white group-hover:text-purple-300 transition-colors">
-                  Softstreak
-                </span>
-                <span className="text-[10px] uppercase font-semibold tracking-wider px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                  SaaS
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-400 font-medium tracking-wide">
-                Software Street <span className="text-slate-500">•</span> under <span className="text-purple-400 font-semibold">{siteConfig.parentCompany}</span>
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative py-1 hover:after:w-full after:w-0 after:h-0.5 after:bg-purple-500 after:absolute after:bottom-0 after:left-0 after:transition-all after:duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Right Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
-            {/* WhatsApp Enquiry Button */}
-            <a
-              href={buildWhatsAppUrl("Hello Softstreak, I would like to enquire about your ready-to-use business software.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-lg transition-all hover:scale-105"
-              title="Chat with us directly on WhatsApp"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-[80px]">
+        <div className="flex items-center justify-between h-[80px]">
+          
+          {/* Left Side: SoftStreak Logo & Navigation Links */}
+          <div className="flex items-center gap-[44px] xl:gap-[56px] h-full">
+            {/* Logo */}
+            <a 
+              href="#home" 
+              className="flex items-center shrink-0 group py-1"
+              title="SoftStreak - Essential Software for Every Business"
+              onClick={closeDropdown}
             >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>WhatsApp Us</span>
+              <img
+                src="/softstreak-logo.png"
+                alt="SoftStreak - Essential Software for Every Business"
+                className="navbar-logo-img w-[145px] max-w-[145px] h-auto object-contain transition-transform duration-150 group-hover:opacity-95"
+              />
             </a>
 
-            {/* Book a Demo Button */}
+            {/* Desktop Navigation Menu: Product, Solutions, Learn, Pricing */}
+            <nav className="hidden lg:flex items-center navbar-nav-gap gap-[40px] h-full">
+              
+              {/* 1. Product Trigger */}
+              <div 
+                className="relative h-full flex items-center"
+                onMouseEnter={() => handleMouseEnter('product')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleToggleClick('product')}
+                  className={`navbar-nav-item inline-flex items-center gap-1.5 text-[18px] font-[500] tracking-normal transition-colors duration-150 py-2 ${
+                    activeDropdown === 'product'
+                      ? 'active text-[#E52430]'
+                      : 'text-[#171923] hover:text-[#E52430]'
+                  }`}
+                  aria-expanded={activeDropdown === 'product'}
+                >
+                  <span>Product</span>
+                  <ChevronDown className={`navbar-dropdown-icon w-[16px] h-[16px] stroke-[2] transition-transform duration-200 ${activeDropdown === 'product' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+                </button>
+
+                {/* Product Mega Menu Dropdown */}
+                {activeDropdown === 'product' && (
+                  <div 
+                    className="absolute top-[80px] left-0 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                    onMouseEnter={() => handleMouseEnter('product')}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <ProductMegaMenu 
+                      onItemClick={closeDropdown}
+                      onOpenDemo={(item) => onOpenDemoModal(item)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* 2. Solutions Trigger */}
+              <div 
+                className="relative h-full flex items-center"
+                onMouseEnter={() => handleMouseEnter('solutions')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleToggleClick('solutions')}
+                  className={`navbar-nav-item inline-flex items-center gap-1.5 text-[18px] font-[500] tracking-normal transition-colors duration-150 py-2 ${
+                    activeDropdown === 'solutions'
+                      ? 'active text-[#E52430]'
+                      : 'text-[#171923] hover:text-[#E52430]'
+                  }`}
+                  aria-expanded={activeDropdown === 'solutions'}
+                >
+                  <span>Solutions</span>
+                  <ChevronDown className={`navbar-dropdown-icon w-[16px] h-[16px] stroke-[2] transition-transform duration-200 ${activeDropdown === 'solutions' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+                </button>
+
+                {/* Solutions Mega Menu Dropdown */}
+                {activeDropdown === 'solutions' && (
+                  <div 
+                    className="absolute top-[80px] -left-20 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                    onMouseEnter={() => handleMouseEnter('solutions')}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <SolutionsMegaMenu 
+                      onItemClick={closeDropdown}
+                      onOpenDemo={(item) => onOpenDemoModal(item)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Learn Trigger */}
+              <div 
+                className="relative h-full flex items-center"
+                onMouseEnter={() => handleMouseEnter('learn')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleToggleClick('learn')}
+                  className={`navbar-nav-item inline-flex items-center gap-1.5 text-[18px] font-[500] tracking-normal transition-colors duration-150 py-2 ${
+                    activeDropdown === 'learn'
+                      ? 'active text-[#E52430]'
+                      : 'text-[#171923] hover:text-[#E52430]'
+                  }`}
+                  aria-expanded={activeDropdown === 'learn'}
+                >
+                  <span>Learn</span>
+                  <ChevronDown className={`navbar-dropdown-icon w-[16px] h-[16px] stroke-[2] transition-transform duration-200 ${activeDropdown === 'learn' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+                </button>
+
+                {/* Learn Mega Menu Dropdown */}
+                {activeDropdown === 'learn' && (
+                  <div 
+                    className="absolute top-[80px] -left-48 z-50 animate-in fade-in slide-in-from-top-1 duration-150"
+                    onMouseEnter={() => handleMouseEnter('learn')}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <LearnMegaMenu 
+                      onItemClick={closeDropdown}
+                      onOpenDemo={(item) => onOpenDemoModal(item)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* 4. Pricing Direct Link */}
+              <a
+                href="#pricing"
+                onClick={closeDropdown}
+                className="navbar-nav-item inline-flex items-center text-[18px] font-[500] tracking-normal text-[#171923] hover:text-[#E52430] transition-colors duration-150 py-2"
+              >
+                Pricing
+              </a>
+
+            </nav>
+          </div>
+
+          {/* Right Side Action Buttons */}
+          <div className="hidden sm:flex items-center gap-3">
+            {/* Get a Demo (Outline/Ghost Button) */}
             <button
-              onClick={() => onOpenDemoModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-lg shadow-glow-sm hover:shadow-glow transition-all duration-300 hover:scale-105"
+              onClick={() => {
+                closeDropdown();
+                onOpenDemoModal();
+              }}
+              className="inline-flex items-center justify-center gap-2 px-5 h-[44px] text-[15px] sm:text-[16px] font-[500] text-[#171923] bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition-all duration-150 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
             >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Book a Demo</span>
-              <ArrowRight className="w-3 h-3 text-purple-200" />
+              <Calendar className="w-4 h-4 text-[#E52430]" />
+              <span>Get a Demo</span>
+            </button>
+
+            {/* Get Started (Primary Red Button) */}
+            <button
+              onClick={() => {
+                closeDropdown();
+                onOpenDemoModal('SoftStreak Get Started');
+              }}
+              className="inline-flex items-center justify-center gap-2 px-6 h-[44px] text-[15px] sm:text-[16px] font-semibold text-white bg-[#E52430] hover:bg-[#D71926] rounded-xl shadow-soft-sm hover:shadow-red-sm transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 text-white/90" />
             </button>
           </div>
 
-          {/* Mobile menu hamburger button */}
+          {/* Mobile Menu Hamburger Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg bg-navy-800 border border-white/10 text-slate-300 hover:text-white focus:outline-none"
+            className="lg:hidden p-2.5 rounded-xl bg-[#F0F1F3] text-[#171923] hover:text-[#E52430] focus:outline-none"
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Expandable Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-navy-950/95 border-b border-purple-500/20 backdrop-blur-xl px-4 pt-4 pb-6 mt-3 shadow-2xl animate-in slide-in-from-top-4 duration-200">
-          <div className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-200 hover:text-purple-400 py-2 border-b border-white/5"
+        <div className="lg:hidden fixed inset-x-0 top-[80px] bottom-0 bg-white border-b border-[#E5E7EB] shadow-2xl overflow-y-auto px-5 py-6 animate-in slide-in-from-top-2 duration-200 z-50">
+          <div className="flex flex-col space-y-3 pb-8">
+            
+            {/* Mobile Product Accordion */}
+            <div className="border-b border-slate-100 pb-2">
+              <button
+                onClick={() => setMobileExpandedSection(mobileExpandedSection === 'product' ? null : 'product')}
+                className="w-full flex items-center justify-between py-2.5 text-base font-bold text-[#171923]"
               >
-                {link.label}
-              </a>
-            ))}
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#E52430]" />
+                  <span>Product</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpandedSection === 'product' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+              </button>
+              {mobileExpandedSection === 'product' && (
+                <div className="pl-6 pt-2 pb-3 space-y-2 text-sm text-[#626773]">
+                  <div className="font-bold text-xs uppercase text-slate-400">Core CRM</div>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Pipelines – Track deals through every stage</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">AI – Power your workflow with AI</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Contacts – Shared contact database</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Task Management – Know what to do next</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Automation – Automate CRM drudgery</a>
+                  
+                  <div className="font-bold text-xs uppercase text-slate-400 pt-2">Email Tools</div>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Email Tracking & Sharing</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Mail Merge & Snippets</a>
+                </div>
+              )}
+            </div>
 
-            <div className="pt-3 flex flex-col gap-2.5">
-              <a
-                href={buildWhatsAppUrl("Hello Softstreak, I would like to enquire about your software products.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-lg"
+            {/* Mobile Solutions Accordion */}
+            <div className="border-b border-slate-100 pb-2">
+              <button
+                onClick={() => setMobileExpandedSection(mobileExpandedSection === 'solutions' ? null : 'solutions')}
+                className="w-full flex items-center justify-between py-2.5 text-base font-bold text-[#171923]"
               >
-                <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp Enquiry</span>
-              </a>
+                <div className="flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-[#E52430]" />
+                  <span>Solutions</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpandedSection === 'solutions' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+              </button>
+              {mobileExpandedSection === 'solutions' && (
+                <div className="pl-6 pt-2 pb-3 space-y-2 text-sm text-[#626773]">
+                  <div className="font-bold text-xs uppercase text-slate-400">Industries</div>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Small Business & Startups</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Venture Capital & Funding</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Real Estate & Travel Agencies</a>
+                  
+                  <div className="font-bold text-xs uppercase text-slate-400 pt-2">Teams</div>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Sales, Support & Hiring</a>
+                  <a href="#products" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Product & Business Development</a>
+                </div>
+              )}
+            </div>
 
+            {/* Mobile Learn Accordion */}
+            <div className="border-b border-slate-100 pb-2">
+              <button
+                onClick={() => setMobileExpandedSection(mobileExpandedSection === 'learn' ? null : 'learn')}
+                className="w-full flex items-center justify-between py-2.5 text-base font-bold text-[#171923]"
+              >
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-[#E52430]" />
+                  <span>Learn</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpandedSection === 'learn' ? 'rotate-180 text-[#E52430]' : 'text-slate-400'}`} />
+              </button>
+              {mobileExpandedSection === 'learn' && (
+                <div className="pl-6 pt-2 pb-3 space-y-2 text-sm text-[#626773]">
+                  <a href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">SoftStreak University</a>
+                  <a href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Live Classes & CRM Setup</a>
+                  <a href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="block py-1 hover:text-[#E52430]">Knowledge Base & API Docs</a>
+                </div>
+              )}
+            </div>
+
+            {/* Pricing Direct Link */}
+            <a
+              href="#pricing"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 text-base font-bold text-[#171923] hover:text-[#E52430] border-b border-slate-100"
+            >
+              Pricing
+            </a>
+
+            {/* Mobile Actions */}
+            <div className="pt-4 flex flex-col gap-3">
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   onOpenDemoModal();
                 }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg shadow-glow-sm"
+                className="flex items-center justify-center gap-2 w-full py-3 text-sm font-semibold text-[#171923] bg-[#F0F1F3] border border-slate-200 rounded-xl"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Book a Demo</span>
+                <Calendar className="w-4 h-4 text-[#E52430]" />
+                <span>Get a Demo</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onOpenDemoModal('SoftStreak Get Started');
+                }}
+                className="flex items-center justify-center gap-2 w-full py-3 text-sm font-semibold text-white bg-[#E52430] hover:bg-[#D71926] rounded-xl shadow-sm"
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-            
-            <div className="pt-2 text-center text-xs text-slate-500">
-              Offered under {siteConfig.parentCompany}
-            </div>
+
           </div>
         </div>
       )}

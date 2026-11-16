@@ -7,51 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: '#060913',
-          900: '#0A0F24',
-          850: '#0E1630',
-          800: '#141E3D',
-          700: '#1D2A54',
-          600: '#2A3C74',
-          500: '#3D5299',
-        },
         brand: {
-          purple: {
-            DEFAULT: '#7C3AED',
-            light: '#9353D3',
-            glow: '#8B5CF6',
-            hover: '#6D28D9',
-            subtle: 'rgba(124, 58, 237, 0.1)',
+          red: {
+            DEFAULT: '#E52430',
+            secondary: '#D71926',
+            hover: '#D71926',
+            light: '#FDECEE',
+            subtle: 'rgba(229, 36, 48, 0.06)',
+            border: 'rgba(229, 36, 48, 0.25)',
           },
-          accent: {
-            cyan: '#06B6D4',
-            emerald: '#10B981',
-            amber: '#F59E0B',
-          }
+          dark: '#171923',
+          heading: '#171923',
+          text: '#626773',
+          darkText: '#171923',
+          bg: '#F7F7F8',
+          gray: '#F0F1F3',
+          border: '#E5E7EB',
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', 'Poppins', 'Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {
-        'glow-sm': '0 0 20px -5px rgba(124, 58, 237, 0.3)',
-        'glow': '0 0 35px -5px rgba(124, 58, 237, 0.35)',
-        'glow-lg': '0 0 50px -5px rgba(139, 92, 246, 0.45)',
-        'card-hover': '0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(124, 58, 237, 0.25)',
-      },
-      animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        }
+        'soft-sm': '0 1px 3px 0 rgba(23, 25, 35, 0.05), 0 1px 2px 0 rgba(23, 25, 35, 0.03)',
+        'soft': '0 4px 20px -2px rgba(23, 25, 35, 0.05), 0 2px 6px -1px rgba(23, 25, 35, 0.03)',
+        'soft-lg': '0 10px 30px -4px rgba(23, 25, 35, 0.08), 0 4px 12px -2px rgba(23, 25, 35, 0.03)',
+        'card-hover': '0 14px 28px rgba(23, 25, 35, 0.08), 0 8px 10px rgba(23, 25, 35, 0.03)',
+        'red-sm': '0 4px 14px 0 rgba(229, 36, 48, 0.28)',
       }
     },
   },
   plugins: [],
 }
-
